@@ -1,15 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.test.controller.user;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.text.ParseException;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserAccountDTO;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.BDDMockito;
@@ -28,14 +26,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.ParseException;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserAccountDTO;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Class that implements tests of the UserAccountController features
@@ -49,7 +43,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class UserAccountControllerTest {
+class UserAccountControllerTest {
 
 	static final String URL = "/api-travels/v1/users-accounts";
 	static final Long ID = 1L;
@@ -65,7 +59,7 @@ public class UserAccountControllerTest {
 	UserAccountService userAccountService;
 	
 	@BeforeAll
-	private void setUp() {
+	void setUp() {
 		headers = new HttpHeaders();
         headers.set("X-api-key", "FX001-ZBSY6YSLP");
 	}
@@ -80,11 +74,11 @@ public class UserAccountControllerTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() throws Exception {
+	void testSave() throws Exception {
 		
 		BDDMockito.given(userAccountService.save(Mockito.any(UserAccount.class))).willReturn(getMockUserAccount());
 		
-		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, USER_ID, ACCOUNT_ID))
+		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload())
 			.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
 			.headers(headers))
 		.andDo(MockMvcResultHandlers.print())
@@ -110,20 +104,15 @@ public class UserAccountControllerTest {
 	
 	/**
 	 * Method that fill a mock UserAccountDTO to use as return in the tests.
-	 * 
+	 *
+	 * @return <code>String</code> with the UserAccountDTO payload
+	 * @throws JsonProcessingException
 	 * @author Mariana Azevedo
 	 * @since 15/12/2020
-	 * 
-	 * @param id
-	 * @param userId
-	 * @param accountId
-	 * @return <code>String</code> with the UserAccountDTO payload
-	 * 
-	 * @throws JsonProcessingException
 	 */
-	private String getJsonPayload(Long id, Long userId, Long accountId) throws JsonProcessingException {
+	private String getJsonPayload() throws JsonProcessingException {
 		
-		UserAccountDTO dto = new UserAccountDTO(id, userId, accountId);
+		UserAccountDTO dto = new UserAccountDTO(UserAccountControllerTest.ID, UserAccountControllerTest.USER_ID, UserAccountControllerTest.ACCOUNT_ID);
 		return new ObjectMapper().writeValueAsString(dto);
 	}
 }

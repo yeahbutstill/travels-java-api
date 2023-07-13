@@ -1,13 +1,18 @@
 package io.github.mariazevedo88.travelsjavaapi.test.service.user;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
+import io.github.mariazevedo88.travelsjavaapi.repository.user.UserAccountRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +23,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
-import io.github.mariazevedo88.travelsjavaapi.repository.user.UserAccountRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Class that implements tests of the UserAccountService features.
@@ -37,7 +36,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class UserAccountServiceTest {
+class UserAccountServiceTest {
 	
 	static final String EMAIL = "email@test.com";
 	static final String ACCOUNT_NUMBER = "1234560";
@@ -56,7 +55,7 @@ public class UserAccountServiceTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() {
+	void testSave() {
 		
 		BDDMockito.given(userAccRepository.save(Mockito.any(UserAccount.class)))
 			.willReturn(getMockUserAccount());

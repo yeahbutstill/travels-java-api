@@ -1,10 +1,7 @@
 package io.github.mariazevedo88.travelsjavaapi.test.repository.statistic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.math.BigDecimal;
-
+import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -15,8 +12,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
-import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepository;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Class that implements tests of the StatisticRepository features
@@ -28,7 +27,7 @@ import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepo
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
-public class StatisticRepositoryTest {
+class StatisticRepositoryTest {
 	
 	@Autowired
 	StatisticRepository repository;
@@ -42,10 +41,10 @@ public class StatisticRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testSave() {
+	void testSave() {
 		
-		statistic = new Statistic(null, new BigDecimal(200d), new BigDecimal(100d),
-				new BigDecimal(100d), new BigDecimal(100d), 2);
+		statistic = new Statistic(null, new BigDecimal("200"), new BigDecimal("100"),
+				new BigDecimal("100"), new BigDecimal("100"), 2);
 		
 		Statistic response = repository.save(statistic);
 		
@@ -65,7 +64,7 @@ public class StatisticRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.delete(statistic);
 	}
 

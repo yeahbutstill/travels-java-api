@@ -1,19 +1,17 @@
 package io.github.mariazevedo88.travelsjavaapi.test.controller.travel;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.time.LocalDateTime;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
@@ -31,17 +29,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
-import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Class that implements tests of the TransactionController features
@@ -55,7 +48,7 @@ import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class TravelControllerTest {
+class TravelControllerTest {
 	
 	static final Long ID = 1L;
 	static final Long ACCOUNT_ID = 1L;
@@ -75,7 +68,7 @@ public class TravelControllerTest {
 	TravelService travelService;
 	
 	@BeforeAll
-	private void setUp() {
+	void setUp() {
 		headers = new HttpHeaders();
         headers.set("X-api-key", "FX001-ZBSY6YSLP");
 	}
@@ -90,14 +83,14 @@ public class TravelControllerTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() throws Exception {
+	void testSave() throws Exception {
 		
 		BDDMockito.given(travelService.save(Mockito.any(Travel.class))).willReturn(getMockTravel());
 		
-		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, ORDER_NUMBER, 
+		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ORDER_NUMBER,
 			TravelsApiUtil.getLocalDateTimeFromString(START_DATE.concat("Z")), 
-			TravelsApiUtil.getLocalDateTimeFromString(END_DATE.concat("Z")), VALUE, 
-			TYPE.getValue(), ACCOUNT_ID))
+			TravelsApiUtil.getLocalDateTimeFromString(END_DATE.concat("Z")),
+								TYPE.getValue()))
 			.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
 			.headers(headers))
 		.andDo(MockMvcResultHandlers.print())
@@ -120,14 +113,14 @@ public class TravelControllerTest {
 	 */
 	@Test
 	@Order(2)
-	public void testSaveInvalidTravel() throws Exception {
+	void testSaveInvalidTravel() throws Exception {
 		
 		BDDMockito.given(travelService.save(Mockito.any(Travel.class))).willReturn(getMockTravel());
 		
-		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, null, 
+		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(null,
 				TravelsApiUtil.getLocalDateTimeFromString(START_DATE.concat("Z")), TravelsApiUtil.
-				 getLocalDateTimeFromString(END_DATE.concat("Z")), VALUE, TYPE.getValue(), 
-				 ACCOUNT_ID))
+				 getLocalDateTimeFromString(END_DATE.concat("Z")), TYPE.getValue()
+						))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
 				.headers(headers))
 		.andExpect(status().isBadRequest())
@@ -144,35 +137,27 @@ public class TravelControllerTest {
 	 * @throws ParseException 
 	 */
 	private Travel getMockTravel() throws ParseException {
-		
-		Travel travel = new Travel(ID, ORDER_NUMBER, 
-				TravelsApiUtil.getLocalDateTimeFromString(START_DATE.concat("Z")), 
-				TravelsApiUtil.getLocalDateTimeFromString(END_DATE.concat("Z")), 
+
+		return new Travel(ID, ORDER_NUMBER,
+				TravelsApiUtil.getLocalDateTimeFromString(START_DATE.concat("Z")),
+				TravelsApiUtil.getLocalDateTimeFromString(END_DATE.concat("Z")),
 				VALUE, TYPE, new Account(1L, "123456", AccountTypeEnum.BASIC));
-		return travel;
 	}
 	
 	/**
 	 * Method that fill a mock TravelDTO object to use as return in the tests.
-	 * 
-	 * @author Mariana Azevedo
-	 * @since 05/04/2020
-	 * 
-	 * @param id
-	 * @param nsu
-	 * @param authorization
-	 * @param transactionDate
-	 * @param amount
+	 *
 	 * @param type
 	 * @return <code>String</code> with the TravelDTO payload
-	 * 
 	 * @throws JsonProcessingException
+	 * @author Mariana Azevedo
+	 * @since 05/04/2020
 	 */
-	private String getJsonPayload(Long id, String orderNumber, LocalDateTime startDate, LocalDateTime endDate,
-			BigDecimal amount, String type, Long accountId) throws JsonProcessingException {
+	private String getJsonPayload(String orderNumber, LocalDateTime startDate, LocalDateTime endDate,
+								  String type) throws JsonProcessingException {
 		
-		TravelDTO dto = new TravelDTO(id, orderNumber, startDate, endDate, 
-				amount, type, accountId);
+		TravelDTO dto = new TravelDTO(TravelControllerTest.ID, orderNumber, startDate, endDate,
+				TravelControllerTest.VALUE, type, TravelControllerTest.ACCOUNT_ID);
 	        
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -180,7 +165,7 @@ public class TravelControllerTest {
 	}
 	
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		travelService.deleteById(1L);
 	}
 

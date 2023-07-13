@@ -1,10 +1,7 @@
 package io.github.mariazevedo88.travelsjavaapi.test.controller.statistic;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.math.BigDecimal;
-
+import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -25,8 +22,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
-import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
+import java.math.BigDecimal;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Class that implements tests of the StatisticController features
@@ -39,7 +38,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class StatisticControllerTest {
+class StatisticControllerTest {
 	
 	private static final Long ID = 1L;
 	private static final BigDecimal SUM = BigDecimal.valueOf(500);
@@ -48,8 +47,8 @@ public class StatisticControllerTest {
 	private static final BigDecimal MAX = BigDecimal.valueOf(200);
 	private static final long COUNT = 4L;
 	private static final String URL = "/api-travels/v1/statistics";
-	
-	private HttpHeaders headers;
+
+	HttpHeaders headers;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -58,7 +57,7 @@ public class StatisticControllerTest {
 	private StatisticService service;
 	
 	@BeforeAll
-	private void setUp() {
+	void setUp() {
 		headers = new HttpHeaders();
         headers.set("X-api-key", "FX001-ZBSY6YSLP");
 	}
@@ -72,7 +71,7 @@ public class StatisticControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testSave() throws Exception {
+	void testSave() throws Exception {
 		
 		BDDMockito.given(service.save(Mockito.any(Statistic.class))).willReturn(getMockStatistic());
 		

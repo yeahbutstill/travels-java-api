@@ -1,15 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.test.service.account;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Optional;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.account.AccountService;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.BDDMockito;
@@ -22,10 +17,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.account.AccountService;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Class that implements tests of the AccountService features.
@@ -38,7 +33,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.account.AccountService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class AccountServiceTest {
+class AccountServiceTest {
 	
 	@Autowired
 	private AccountService service;
@@ -56,7 +51,7 @@ public class AccountServiceTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() {
+	void testSave() {
 		
 		BDDMockito.given(repository.save(Mockito.any(Account.class)))
 			.willReturn(getMockAccount());
@@ -74,13 +69,13 @@ public class AccountServiceTest {
 	 */
 	@Test
 	@Order(2)
-	public void testFindByAccountNumber(){
+	void testFindByAccountNumber(){
 		
 		BDDMockito.given(repository.findByAccountNumber(Mockito.anyString()))
-			.willReturn(Optional.ofNullable(new Account()));
+			.willReturn(Optional.of(new Account()));
 
 		Optional<Account> response = service.findByAccountNumber(ACCOUNT_NUMBER);
-		assertTrue(!response.isEmpty());
+		assertFalse(response.isEmpty());
 	}
 	
 	/**
@@ -90,7 +85,7 @@ public class AccountServiceTest {
 	 * @since 17/12/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.deleteAll();
 	}
 	

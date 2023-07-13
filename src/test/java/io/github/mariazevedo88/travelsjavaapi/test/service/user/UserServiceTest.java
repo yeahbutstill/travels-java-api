@@ -1,15 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.test.service.user;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Optional;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.BDDMockito;
@@ -22,10 +17,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Class that implements tests of the UserService features.
@@ -38,7 +33,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class UserServiceTest {
+class UserServiceTest {
 	
 	@Autowired
 	private UserService service;
@@ -56,7 +51,7 @@ public class UserServiceTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() {
+	void testSave() {
 		
 		BDDMockito.given(repository.save(Mockito.any(User.class)))
 			.willReturn(getMockUser());
@@ -73,13 +68,13 @@ public class UserServiceTest {
 	 */
 	@Test
 	@Order(2)
-	public void testFindByEmail(){
+	void testFindByEmail(){
 		
 		BDDMockito.given(repository.findByEmail(Mockito.anyString()))
-			.willReturn(Optional.ofNullable(new User()));
+			.willReturn(Optional.of(new User()));
 
 		Optional<User> response = service.findByEmail(EMAIL);
-		assertTrue(!response.isEmpty());
+		assertFalse(response.isEmpty());
 	}
 	
 	/**
@@ -101,7 +96,7 @@ public class UserServiceTest {
 	 * @since 25/10/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.deleteAll();
 	}
 

@@ -1,9 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.test.service.statistic;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.math.BigDecimal;
+import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -17,9 +16,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
-import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Class that implements tests of the StatisticService features.
@@ -31,7 +31,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class StatisticServiceTest {
+class StatisticServiceTest {
 	
 	private static final BigDecimal SUM = BigDecimal.valueOf(500);
 	private static final BigDecimal AVG = BigDecimal.valueOf(125);
@@ -52,7 +52,7 @@ public class StatisticServiceTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testSave() {
+	void testSave() {
 		
 		BDDMockito.given(repository.save(Mockito.any(Statistic.class)))
 			.willReturn(getMockStatistic());

@@ -1,15 +1,12 @@
 package io.github.mariazevedo88.travelsjavaapi.test.controller.user;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.text.ParseException;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.BDDMockito;
@@ -28,13 +25,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.ParseException;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Class that implements tests of the UserController features
@@ -48,7 +42,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class UserControllerTest {
+class UserControllerTest {
 
 	static final String URL = "/api-travels/v1/users";
 	static final Long ID = 1L;
@@ -65,7 +59,7 @@ public class UserControllerTest {
 	UserService userService;
 	
 	@BeforeAll
-	private void setUp() {
+	void setUp() {
 		headers = new HttpHeaders();
         headers.set("X-api-key", "FX001-ZBSY6YSLP");
 	}
@@ -80,11 +74,11 @@ public class UserControllerTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() throws Exception {
+	void testSave() throws Exception {
 		
 		BDDMockito.given(userService.save(Mockito.any(User.class))).willReturn(getMockUser());
 		
-		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload(ID, NAME, PASSWORD, EMAIL, RoleEnum.ROLE_ADMIN))
+		mockMvc.perform(MockMvcRequestBuilders.post(URL).content(getJsonPayload())
 			.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)
 			.headers(headers))
 		.andDo(MockMvcResultHandlers.print())
@@ -111,21 +105,15 @@ public class UserControllerTest {
 	
 	/**
 	 * Method that fill a mock UserDTO object to use as return in the tests.
-	 * 
+	 *
+	 * @return <code>String</code> with the UserDTO payload
+	 * @throws JsonProcessingException
 	 * @author Mariana Azevedo
 	 * @since 13/12/2020
-	 * 
-	 * @param id
-	 * @param accountNumber
-	 * @param accountType
-	 * @return <code>String</code> with the UserDTO payload
-	 * 
-	 * @throws JsonProcessingException
 	 */
-	private String getJsonPayload(Long id, String name, String password, String email,
-			RoleEnum role) throws JsonProcessingException {
+	private String getJsonPayload() throws JsonProcessingException {
 		
-		UserDTO dto = new UserDTO(id, name, password, email, role.getValue());
+		UserDTO dto = new UserDTO(UserControllerTest.ID, UserControllerTest.NAME, UserControllerTest.PASSWORD, UserControllerTest.EMAIL, RoleEnum.ROLE_ADMIN.getValue());
 		return new ObjectMapper().writeValueAsString(dto);
 	}
 }

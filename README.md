@@ -187,6 +187,19 @@ It will clean, compile and generate a `jar` at target directory, e.g. `travels-j
 
 You need to have **PostgreSQL 9.6.17 or above** installed on your machine to run the API on `dev` profile. After installed, on the `pgAdmin` create a database named `travels`. If you don't have `pgAdmin` installed you can run on the `psql` console the follow command:
 
+#### With Docker
+```shell
+docker run --rm \
+--name restful-travels \
+-e POSTGRES_DB=travels \
+-e POSTGRES_USER=travels \
+-e POSTGRES_PASSWORD=PNSJkxXvVNDAhePMuExTBuRR \
+-e PGDATA=/var/lib/postgresql/data/pgdata \
+-v "$PWD/travels-data:/var/lib/postgresql/data" \
+-p 5432:5432 \
+postgres:13
+```
+
 ```sql
 CREATE database travels;
 ```

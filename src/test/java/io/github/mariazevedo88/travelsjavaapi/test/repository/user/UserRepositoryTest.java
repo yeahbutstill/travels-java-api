@@ -1,11 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.test.repository.user;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Optional;
-
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -16,9 +13,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class that implements tests of the UserRepository functionalities
@@ -30,7 +27,7 @@ import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
-public class UserRepositoryTest {
+class UserRepositoryTest {
 	
 	static final String EMAIL = "email@test.com";
 
@@ -46,7 +43,7 @@ public class UserRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testSave() {
+	void testSave() {
 		
 		User user = new User(null, "Setup User", "123", EMAIL, 
 				RoleEnum.ROLE_ADMIN);
@@ -62,7 +59,7 @@ public class UserRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testFindByEmail(){
+	void testFindByEmail(){
 		Optional<User> response = repository.findByEmail(EMAIL);
 		
 		assertTrue(response.isPresent());
@@ -76,7 +73,7 @@ public class UserRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.deleteAll();
 	}
 

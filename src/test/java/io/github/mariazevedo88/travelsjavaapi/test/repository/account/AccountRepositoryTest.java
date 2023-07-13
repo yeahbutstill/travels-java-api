@@ -1,13 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.test.repository.account;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,9 +14,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class that implements tests of the AccountRepositoryTest functionalities
@@ -33,7 +30,7 @@ import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountReposito
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
-public class AccountRepositoryTest {
+class AccountRepositoryTest {
 	
 	@Autowired
 	private AccountRepository repository;
@@ -49,7 +46,7 @@ public class AccountRepositoryTest {
 	 * @since 25/10/2020
 	 */
 	@BeforeAll
-	private void setUp() {
+	void setUp() {
 		
 		Account account = new Account(null, ACCOUNT_NUMBER, 
 				AccountTypeEnum.BASIC);
@@ -66,7 +63,7 @@ public class AccountRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testSave() {
+	void testSave() {
 		
 		Account account = new Account(null, "98756401", 
 				AccountTypeEnum.PREMIUM);
@@ -84,7 +81,7 @@ public class AccountRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testFindByAccountNumber(){
+	void testFindByAccountNumber(){
 		Optional<Account> response = repository.findByAccountNumber(ACCOUNT_NUMBER);
 		
 		assertTrue(response.isPresent());
@@ -98,7 +95,7 @@ public class AccountRepositoryTest {
 	 * @since 25/10/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.deleteAll(accounts);
 	}
 

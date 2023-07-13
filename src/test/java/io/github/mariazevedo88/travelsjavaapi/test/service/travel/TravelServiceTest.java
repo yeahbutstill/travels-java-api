@@ -1,8 +1,24 @@
 package io.github.mariazevedo88.travelsjavaapi.test.service.travel;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import io.github.mariazevedo88.travelsjavaapi.repository.travel.TravelRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.mockito.BDDMockito;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener;
+import org.springframework.data.domain.*;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,34 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.mockito.BDDMockito;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
-import io.github.mariazevedo88.travelsjavaapi.repository.travel.TravelRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Class that implements tests of the TravelService features.
@@ -50,7 +39,7 @@ import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, MockitoTestExecutionListener.class })
-public class TravelServiceTest {
+class TravelServiceTest {
 	
 	@Autowired
 	private TravelService service;
@@ -68,7 +57,7 @@ public class TravelServiceTest {
 	 */
 	@Test
 	@Order(1)
-	public void testSave() {
+	void testSave() {
 		
 		BDDMockito.given(repository.save(Mockito.any(Travel.class)))
 			.willReturn(getMockTravel());
@@ -86,13 +75,13 @@ public class TravelServiceTest {
 	 */
 	@Test
 	@Order(2)
-	public void testFindByOrderNumber() {
+	void testFindByOrderNumber() {
 		
 		BDDMockito.given(repository.findByOrderNumber(Mockito.anyString()))
 			.willReturn(Optional.of(new Travel()));
 		
 		Optional<Travel> response = service.findByOrderNumber("123456");
-		assertTrue(!response.isEmpty());
+		assertFalse(response.isEmpty());
 	}
 	
 	/**
@@ -103,7 +92,7 @@ public class TravelServiceTest {
 	 */
 	@Test
 	@Order(3)
-	public void testFindBetweenDates() {
+	void testFindBetweenDates() {
 		
 		List<Travel> transactions = new ArrayList<>();
 		transactions.add(getMockTravel());
@@ -125,11 +114,10 @@ public class TravelServiceTest {
 	 * @return <code>Travel</code> object
 	 */
 	private Travel getMockTravel() {
-		
-		Travel travel = new Travel(1L, "123456", DATE,
+
+		return new Travel(1L, "123456", DATE,
 				null, BigDecimal.valueOf(288), TravelTypeEnum.ONE_WAY,
 				new Account(1L, "635241", AccountTypeEnum.BASIC));
-		return travel;
 	}
 	
 	/**
@@ -139,7 +127,7 @@ public class TravelServiceTest {
 	 * @since 25/10/2020
 	 */
 	@AfterAll
-	private void tearDown() {
+	void tearDown() {
 		repository.deleteAll();
 	}
 

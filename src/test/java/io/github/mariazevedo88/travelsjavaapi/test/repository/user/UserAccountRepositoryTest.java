@@ -1,5 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.test.repository.user;
 
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
+import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
+import io.github.mariazevedo88.travelsjavaapi.repository.user.UserAccountRepository;
+import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -9,15 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
-import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
-import io.github.mariazevedo88.travelsjavaapi.repository.user.UserAccountRepository;
-import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
 
 /**
  * Class that implements tests of the UserAccountRepository functionalities
@@ -29,7 +28,7 @@ import io.github.mariazevedo88.travelsjavaapi.repository.user.UserRepository;
 @ActiveProfiles("test")
 @TestInstance(Lifecycle.PER_CLASS)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
-public class UserAccountRepositoryTest {
+class UserAccountRepositoryTest {
 	
 	static final String EMAIL = "main@test.com";
 	static final String ACCOUNT_NUMBER = "999887";
@@ -50,7 +49,7 @@ public class UserAccountRepositoryTest {
 	 * @since 24/03/2020
 	 */
 	@Test
-	public void testSave() {
+	void testSave() {
 		
 		User user = new User(null, "Main User", "9999", EMAIL, 
 				RoleEnum.ROLE_ADMIN);
@@ -71,10 +70,10 @@ public class UserAccountRepositoryTest {
 	 * @since 08/12/2020
 	 */
 	@AfterAll
-	private void tearDown() {
-		userAccRepository.deleteAll();
-		accountRepository.deleteAll();
-		userRepository.deleteAll();
+	void tearDown() {
+//		userAccRepository.deleteAll();
+//		accountRepository.deleteAll();
+//		userRepository.deleteAll();
 	}
 
 }
