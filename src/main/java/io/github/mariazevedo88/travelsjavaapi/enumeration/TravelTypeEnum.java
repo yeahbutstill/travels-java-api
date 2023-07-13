@@ -10,9 +10,9 @@ public enum TravelTypeEnum {
 	
 	ONE_WAY("ONE-WAY"), RETURN("RETURN"), MULTI_CITY("MULTI-CITY");
 	
-	private String value;
+	private final String value;
 	
-	private TravelTypeEnum(String value) {
+	TravelTypeEnum(String value) {
 		this.value = value;
 	}
 

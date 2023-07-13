@@ -11,9 +11,9 @@ public enum RoleEnum {
 	ROLE_ADMIN("ROLE_ADMIN"), 
 	ROLE_USER("ROLE_USER");
 	
-	private String value;
+	private final String value;
 	
-	private RoleEnum(String value) {
+	RoleEnum(String value) {
 		this.value = value;
 	}
 

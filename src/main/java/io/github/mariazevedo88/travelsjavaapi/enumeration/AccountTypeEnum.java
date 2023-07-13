@@ -15,9 +15,9 @@ public enum AccountTypeEnum {
 	BASIC("BASIC"), 
 	PREMIUM("PREMIUM");
 	
-	private String value;
+	private final String value;
 	
-	private AccountTypeEnum(String value) {
+	AccountTypeEnum(String value) {
 		this.value = value;
 	}
 

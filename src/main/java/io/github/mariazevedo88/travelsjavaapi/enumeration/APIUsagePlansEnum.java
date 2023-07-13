@@ -17,9 +17,9 @@ public enum APIUsagePlansEnum {
     BASIC(40),
     PREMIUM(100);
 
-    private int bucketCapacity;
+    private final int bucketCapacity;
     
-    private APIUsagePlansEnum (int bucketCapacity) {
+    APIUsagePlansEnum (int bucketCapacity) {
         this.bucketCapacity = bucketCapacity;
     }
     
