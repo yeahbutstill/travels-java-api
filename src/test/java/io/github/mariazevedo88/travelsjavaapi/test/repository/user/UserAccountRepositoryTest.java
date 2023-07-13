@@ -71,9 +71,7 @@ class UserAccountRepositoryTest {
 	 */
 	@AfterAll
 	void tearDown() {
-//		userAccRepository.deleteAll();
-//		accountRepository.deleteAll();
-//		userRepository.deleteAll();
+		userAccRepository.deleteAll();
 	}
 
 }
