@@ -2,14 +2,18 @@ package io.github.mariazevedo88.travelsjavaapi.model.security;
 
 import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
 import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 /**
  * Class that implements a factory to create a JwtUser.
  * 

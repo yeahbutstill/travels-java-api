@@ -3,11 +3,13 @@ package io.github.mariazevedo88.travelsjavaapi.model.account;
 import io.github.mariazevedo88.travelsjavaapi.dto.model.account.AccountDTO;
 import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Class that implements the Account structure.
@@ -54,5 +56,21 @@ public class Account implements Serializable {
 	 */
 	public AccountDTO convertEntityToDTO() {
 		return new ModelMapper().map(this, AccountDTO.class);
+	}
+
+	@Override
+	public final boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null) return false;
+		Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+		Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+		if (thisEffectiveClass != oEffectiveClass) return false;
+		Account account = (Account) o;
+		return getId() != null && Objects.equals(getId(), account.getId());
+	}
+
+	@Override
+	public final int hashCode() {
+		return getClass().hashCode();
 	}
 }

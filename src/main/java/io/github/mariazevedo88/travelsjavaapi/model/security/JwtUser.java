@@ -1,10 +1,16 @@
 package io.github.mariazevedo88.travelsjavaapi.model.security;
 
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 /**
  * Class that implements UserDetails from SpringFramework Security Core
  * for authentication purposes.
