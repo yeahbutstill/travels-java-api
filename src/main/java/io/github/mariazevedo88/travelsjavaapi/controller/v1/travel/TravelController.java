@@ -1,18 +1,15 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.travel;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
+import io.github.mariazevedo88.travelsjavaapi.exception.NotParsableContentException;
+import io.github.mariazevedo88.travelsjavaapi.exception.TravelInvalidUpdateException;
+import io.github.mariazevedo88.travelsjavaapi.exception.TravelNotFoundException;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -24,27 +21,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
-import io.github.mariazevedo88.travelsjavaapi.exception.NotParsableContentException;
-import io.github.mariazevedo88.travelsjavaapi.exception.TravelInvalidUpdateException;
-import io.github.mariazevedo88.travelsjavaapi.exception.TravelNotFoundException;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
-import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.log4j.Log4j2;
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * SpringBoot RestController that creates all service end-points related to the travel.
@@ -57,13 +44,13 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api-travels/v1/travels")
 public class TravelController {
 	
-	TravelService travelService;
-	
-	@Autowired
+	private final TravelService travelService;
+
 	public TravelController(TravelService travelService) {
 		this.travelService = travelService;
 	}
-	
+
+
 	/**
 	 * Method that creates travels in the database.
 	 * 

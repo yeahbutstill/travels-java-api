@@ -1,8 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.user;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
+import io.github.mariazevedo88.travelsjavaapi.model.user.User;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -10,17 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
-import io.github.mariazevedo88.travelsjavaapi.model.user.User;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import javax.validation.Valid;
 
 /**
  * SpringBoot RestController that implements all API service end-points related to the user.
@@ -32,9 +26,12 @@ import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 @RequestMapping("/api-travels/v1/users")
 public class UserController {
 	
-	@Autowired
-	private UserService service;
-	
+	private final UserService service;
+
+	public UserController(UserService service) {
+		this.service = service;
+	}
+
 	/**
 	 * Method that creates an user in the API.
 	 * 

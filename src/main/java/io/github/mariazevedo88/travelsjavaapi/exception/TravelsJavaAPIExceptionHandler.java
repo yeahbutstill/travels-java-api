@@ -1,5 +1,7 @@
 package io.github.mariazevedo88.travelsjavaapi.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -7,10 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ServerErrorException;
-
-import com.fasterxml.jackson.core.JsonParseException;
-
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
 
 /**
  * Class that implements a handler of exceptions and errors in the API, using {@ControllerAdvice} 

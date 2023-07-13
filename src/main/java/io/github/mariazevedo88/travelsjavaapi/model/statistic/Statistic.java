@@ -1,23 +1,12 @@
 package io.github.mariazevedo88.travelsjavaapi.model.statistic;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import io.github.mariazevedo88.travelsjavaapi.dto.model.statistic.StatisticDTO;
+import lombok.*;
 import org.modelmapper.ModelMapper;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.statistic.StatisticDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Class that implements the Statistic structure.

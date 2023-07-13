@@ -1,10 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.statistic;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.statistic.StatisticDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
+import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
+import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -16,14 +19,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.statistic.StatisticDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
-import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
-import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
-import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
-import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
 
 /**
  * SpringBoot RestController that creates all service end-points related to the statistics.
@@ -35,11 +33,10 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api-travels/v1/statistics")
 public class StatisticController {
 	
-	private StatisticService statisticService;
+	private final StatisticService statisticService;
 	
-	private TravelService travelService;
+	private final TravelService travelService;
 	
-	@Autowired
 	public StatisticController(StatisticService statisticService, TravelService travelService) {
 		this.statisticService = statisticService;
 		this.travelService = travelService;

@@ -1,24 +1,15 @@
 package io.github.mariazevedo88.travelsjavaapi.model.user;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.modelmapper.ModelMapper;
-
 import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
 import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Class that implements an User entity in the API.

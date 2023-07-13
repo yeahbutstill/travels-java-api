@@ -1,15 +1,14 @@
 package io.github.mariazevedo88.travelsjavaapi.service.ratelimiting.impl;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.stereotype.Service;
-
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Bucket4j;
 import io.github.mariazevedo88.travelsjavaapi.enumeration.APIUsagePlansEnum;
 import io.github.mariazevedo88.travelsjavaapi.service.ratelimiting.APIUsagePlansService;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class that implements the API usage plans service methods.

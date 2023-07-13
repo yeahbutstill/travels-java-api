@@ -1,15 +1,14 @@
 package io.github.mariazevedo88.travelsjavaapi.service.travel;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
 import io.github.mariazevedo88.travelsjavaapi.exception.TravelNotFoundException;
 import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface that provides methods for manipulating Travel objects.

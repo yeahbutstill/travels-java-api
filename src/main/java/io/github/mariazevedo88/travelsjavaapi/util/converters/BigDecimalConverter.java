@@ -1,10 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.util.converters;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.zero_x_baadf00d.partialize.converter.Converter;
+
+import java.math.BigDecimal;
 
 /**
  * Class that converts a given data in BigDecimal format to a JSON compatible format

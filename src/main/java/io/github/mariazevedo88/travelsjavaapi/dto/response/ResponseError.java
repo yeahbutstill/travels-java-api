@@ -1,13 +1,12 @@
 package io.github.mariazevedo88.travelsjavaapi.dto.response;
 
-import java.time.LocalDateTime;
-
-import javax.validation.constraints.NotNull;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 /**
  * Class that implements a generic response error object to the API end-points.

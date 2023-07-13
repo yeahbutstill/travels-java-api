@@ -1,9 +1,9 @@
 package io.github.mariazevedo88.travelsjavaapi.enumeration;
 
-import java.time.Duration;
-
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Refill;
+
+import java.time.Duration;
 
 /**
  * Enum that classifies the usage plans in the API.

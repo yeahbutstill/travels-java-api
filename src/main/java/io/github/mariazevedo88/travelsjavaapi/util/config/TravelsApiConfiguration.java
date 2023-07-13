@@ -1,8 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.util.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.zero_x_baadf00d.partialize.PartializeConverterManager;
+import io.github.mariazevedo88.travelsjavaapi.util.converters.BigDecimalConverter;
+import io.github.mariazevedo88.travelsjavaapi.util.converters.LocalDateTimeConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.client.LinkDiscoverer;
@@ -10,10 +10,8 @@ import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
 import org.springframework.plugin.core.SimplePluginRegistry;
 
-import com.zero_x_baadf00d.partialize.PartializeConverterManager;
-
-import io.github.mariazevedo88.travelsjavaapi.util.converters.BigDecimalConverter;
-import io.github.mariazevedo88.travelsjavaapi.util.converters.LocalDateTimeConverter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that implements the necessary settings for the API to works.

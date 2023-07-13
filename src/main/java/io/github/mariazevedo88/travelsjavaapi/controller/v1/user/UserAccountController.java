@@ -1,8 +1,11 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.user;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.mariazevedo88.travelsjavaapi.controller.v1.travel.TravelController;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserAccountDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
+import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
+import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -10,18 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.github.mariazevedo88.travelsjavaapi.controller.v1.travel.TravelController;
-import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserAccountDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
-import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
-import io.github.mariazevedo88.travelsjavaapi.service.user.UserAccountService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import javax.validation.Valid;
 
 /**
  * SpringBoot RestController that implements all API service end-points related to the 
@@ -34,9 +28,12 @@ import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 @RequestMapping("/api-travels/v1/users-accounts")
 public class UserAccountController {
 
-	@Autowired
-	private UserAccountService service;
-	
+	private final UserAccountService service;
+
+	public UserAccountController(UserAccountService service) {
+		this.service = service;
+	}
+
 	/**
 	 * Method that creates an association with the user and a account in the Travels API.
 	 * 

@@ -1,19 +1,18 @@
 package io.github.mariazevedo88.travelsjavaapi.util.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.ConsumptionProbe;
+import io.github.mariazevedo88.travelsjavaapi.service.ratelimiting.APIUsagePlansService;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import io.github.bucket4j.Bucket;
-import io.github.bucket4j.ConsumptionProbe;
-import io.github.mariazevedo88.travelsjavaapi.service.ratelimiting.APIUsagePlansService;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
-import lombok.extern.log4j.Log4j2;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Class that implements a interceptor of rate limiting in the API

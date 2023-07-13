@@ -1,12 +1,11 @@
 package io.github.mariazevedo88.travelsjavaapi.dto.response;
 
-import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 /**
  * Class that implements a generic response to the API end-points.

@@ -1,11 +1,11 @@
 package io.github.mariazevedo88.travelsjavaapi.util.converters;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.zero_x_baadf00d.partialize.converter.Converter;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Class that converts a given data in LocalDateTime format to a JSON compatible format

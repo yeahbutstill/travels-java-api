@@ -1,10 +1,9 @@
 package io.github.mariazevedo88.travelsjavaapi.repository.user;
 
-import java.util.Optional;
-
+import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import io.github.mariazevedo88.travelsjavaapi.model.user.UserAccount;
+import java.util.Optional;
 
 /**
  * Interface that implements the User Account Repository, with JPA CRUD methods

@@ -1,5 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.util;
 
+import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -7,9 +10,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-
-import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
 
 /**
  * Class that implements the Travels Java API utility methods.

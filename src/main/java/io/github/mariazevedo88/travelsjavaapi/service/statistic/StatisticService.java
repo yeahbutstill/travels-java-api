@@ -1,9 +1,9 @@
 package io.github.mariazevedo88.travelsjavaapi.service.statistic;
 
-import java.math.BigDecimal;
-
 import io.github.mariazevedo88.travelsjavaapi.exception.DuplicateStatisticsException;
 import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+
+import java.math.BigDecimal;
 
 /**
  * Interface that provides methods for manipulating Statistics objects.

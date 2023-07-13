@@ -1,14 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.repository.statistic;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
+import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
+import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  * Interface that implements the Statistic Repository, with JPA CRUD methods.

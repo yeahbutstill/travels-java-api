@@ -1,17 +1,23 @@
 package io.github.mariazevedo88.travelsjavaapi.it;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.time.LocalDate;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.account.AccountDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.security.JwtUserDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.APIUsagePlansEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
+import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,20 +32,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.time.LocalDate;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.account.AccountDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.model.security.JwtUserDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserDTO;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.APIUsagePlansEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.RoleEnum;
-import io.github.mariazevedo88.travelsjavaapi.enumeration.TravelTypeEnum;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Class that implements API integration tests.

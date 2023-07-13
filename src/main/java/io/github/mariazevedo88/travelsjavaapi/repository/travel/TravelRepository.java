@@ -1,14 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.repository.travel;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Interface that implements the Travel Repository, with JPA CRUD methods

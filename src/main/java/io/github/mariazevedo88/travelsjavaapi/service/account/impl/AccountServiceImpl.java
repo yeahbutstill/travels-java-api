@@ -1,13 +1,12 @@
 package io.github.mariazevedo88.travelsjavaapi.service.account.impl;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
 import io.github.mariazevedo88.travelsjavaapi.repository.account.AccountRepository;
 import io.github.mariazevedo88.travelsjavaapi.service.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Class that implements the account service methods

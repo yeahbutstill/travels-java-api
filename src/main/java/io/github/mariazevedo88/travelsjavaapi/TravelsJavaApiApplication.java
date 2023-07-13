@@ -1,11 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi;
 
-import java.time.LocalDateTime;
-
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import lombok.extern.log4j.Log4j2;
+import java.time.LocalDateTime;
 
 /**
  * Class that starts the application

@@ -1,30 +1,5 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.account;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import io.github.mariazevedo88.travelsjavaapi.dto.model.account.AccountDTO;
 import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
 import io.github.mariazevedo88.travelsjavaapi.exception.AccountNotFoundException;
@@ -34,6 +9,22 @@ import io.github.mariazevedo88.travelsjavaapi.service.account.AccountService;
 import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * SpringBoot RestController that creates all service end-points related to the account.
@@ -46,9 +37,8 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/api-travels/v1/accounts")
 public class AccountController {
 
-	AccountService accountService;
+	private final AccountService accountService;
 	
-	@Autowired
 	public AccountController(AccountService accountService) {
 		this.accountService = accountService;
 	}

@@ -1,24 +1,15 @@
 package io.github.mariazevedo88.travelsjavaapi.model.user;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import org.modelmapper.ModelMapper;
-
 import io.github.mariazevedo88.travelsjavaapi.dto.model.user.UserAccountDTO;
 import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Class that implements an UserAccount entity - to represents

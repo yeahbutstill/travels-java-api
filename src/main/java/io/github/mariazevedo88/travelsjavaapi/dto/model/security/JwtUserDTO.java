@@ -1,12 +1,12 @@
 package io.github.mariazevedo88.travelsjavaapi.dto.model.security;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * Class that implements JWT Authentication data transfer object (DTO)

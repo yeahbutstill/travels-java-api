@@ -1,8 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.controller.v1.security;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.security.JwtUserDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.security.TokenDTO;
+import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
+import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
+import io.github.mariazevedo88.travelsjavaapi.util.security.JwtTokenUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,17 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.github.mariazevedo88.travelsjavaapi.dto.model.security.JwtUserDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.model.security.TokenDTO;
-import io.github.mariazevedo88.travelsjavaapi.dto.response.Response;
-import io.github.mariazevedo88.travelsjavaapi.util.TravelsApiUtil;
-import io.github.mariazevedo88.travelsjavaapi.util.security.JwtTokenUtil;
+import javax.validation.Valid;
 
 /**
  * SpringBoot RestController that implements the API authentication end-points.
@@ -37,15 +31,18 @@ import io.github.mariazevedo88.travelsjavaapi.util.security.JwtTokenUtil;
 @RequestMapping("/api-travels/v1/auth")
 public class AuthenticationController {
 	
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
+	private final JwtTokenUtil jwtTokenUtil;
 
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
+	private final UserDetailsService userDetailsService;
+
+	public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
+		this.authenticationManager = authenticationManager;
+		this.jwtTokenUtil = jwtTokenUtil;
+		this.userDetailsService = userDetailsService;
+	}
+
 	/**
 	 * Method that generates valid JWT tokens to authorize access for API clients.
 	 * 

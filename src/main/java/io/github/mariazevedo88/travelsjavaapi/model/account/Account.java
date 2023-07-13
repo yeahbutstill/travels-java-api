@@ -1,26 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.model.account;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.modelmapper.ModelMapper;
-
 import io.github.mariazevedo88.travelsjavaapi.dto.model.account.AccountDTO;
 import io.github.mariazevedo88.travelsjavaapi.enumeration.AccountTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.modelmapper.ModelMapper;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Class that implements the Account structure.

@@ -1,24 +1,22 @@
 package io.github.mariazevedo88.travelsjavaapi.service.travel.impl;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ContainerNode;
+import com.zero_x_baadf00d.partialize.Partialize;
+import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
+import io.github.mariazevedo88.travelsjavaapi.exception.TravelNotFoundException;
+import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
+import io.github.mariazevedo88.travelsjavaapi.repository.travel.TravelRepository;
+import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ContainerNode;
-import com.zero_x_baadf00d.partialize.Partialize;
-
-import io.github.mariazevedo88.travelsjavaapi.dto.model.travel.TravelDTO;
-import io.github.mariazevedo88.travelsjavaapi.exception.TravelNotFoundException;
-import io.github.mariazevedo88.travelsjavaapi.model.travel.Travel;
-import io.github.mariazevedo88.travelsjavaapi.repository.travel.TravelRepository;
-import io.github.mariazevedo88.travelsjavaapi.service.travel.TravelService;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Class that implements the travel's service methods

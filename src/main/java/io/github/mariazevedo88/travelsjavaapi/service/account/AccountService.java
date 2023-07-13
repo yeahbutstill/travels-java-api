@@ -1,8 +1,8 @@
 package io.github.mariazevedo88.travelsjavaapi.service.account;
 
-import java.util.Optional;
-
 import io.github.mariazevedo88.travelsjavaapi.model.account.Account;
+
+import java.util.Optional;
 
 /**
  * Interface that provides methods for manipulating Account objects.

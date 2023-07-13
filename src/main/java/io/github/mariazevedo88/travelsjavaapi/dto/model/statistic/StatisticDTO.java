@@ -1,15 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.dto.model.statistic;
 
-import java.math.BigDecimal;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.hateoas.RepresentationModel;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 /**
  * Class that implements Statistic data transfer object (DTO)

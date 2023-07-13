@@ -1,11 +1,10 @@
 package io.github.mariazevedo88.travelsjavaapi.util.config;
 
+import io.github.mariazevedo88.travelsjavaapi.util.interceptor.RateLimitInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import io.github.mariazevedo88.travelsjavaapi.util.interceptor.RateLimitInterceptor;
 
 /**
  * Class that implements the necessary settings for the rate limiting in the API

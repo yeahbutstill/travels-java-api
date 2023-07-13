@@ -1,10 +1,9 @@
 package io.github.mariazevedo88.travelsjavaapi.util.logging;
 
+import lombok.extern.log4j.Log4j2;
 import org.ehcache.event.CacheEvent;
 import org.ehcache.event.CacheEventListener;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.log4j.Log4j2;
 
 /**
  * Class that implements an event logger to show cache creation and expiration

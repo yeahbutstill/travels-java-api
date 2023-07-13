@@ -1,14 +1,13 @@
 package io.github.mariazevedo88.travelsjavaapi.service.statistic.impl;
 
-import java.math.BigDecimal;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import io.github.mariazevedo88.travelsjavaapi.exception.DuplicateStatisticsException;
 import io.github.mariazevedo88.travelsjavaapi.model.statistic.Statistic;
 import io.github.mariazevedo88.travelsjavaapi.repository.statistic.StatisticRepository;
 import io.github.mariazevedo88.travelsjavaapi.service.statistic.StatisticService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * Class that implements the statistic's service methods
